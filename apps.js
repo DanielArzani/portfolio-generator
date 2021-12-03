@@ -1,10 +1,7 @@
 const { prompt } = require("inquirer");
 const inquirer = require("inquirer");
-//^ Will come back to this code later
 const fs = require("fs");
 const generatePage = require(`./src/page-template.js`);
-
-//^ Will come back to this code later
 
 const promptUser = () => {
   return inquirer.prompt([
@@ -155,7 +152,23 @@ promptUser()
     const pageHTML = generatePage(portfolioData);
 
     // Data, Options, Callback-Function
-    fs.writeFile("index.html", pageHTML, (err) => {
-      if (err) throw new Error(err);
+    fs.writeFile("./dist/index.html", pageHTML, (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log(
+        "Page created! Check out index.html in this directory to see it!"
+      );
+
+      // Src, Destination, Callback-Function
+      fs.copyFile("./src/style.css", "./dist/style.css", (err) => {
+        if (err) {
+          console.log(err);
+          // If theres an error this will stop the if statement
+          return;
+        }
+        console.log("Style sheet copied successfully!");
+      });
     });
   });

@@ -3,7 +3,7 @@ const generateAbout = (aboutText) => {
   if (!aboutText) {
     return "";
   }
-
+  //^ Shouldn't this be an else statement?
   return `
     <section class="my-3" id="about">
       <h2 class="text-dark bg-primary p-2 display-inline-block">About Me</h2>
@@ -61,6 +61,8 @@ module.exports = (templateData) => {
   // destructure projects and about data from templateData based on their property key names
   // What about the data we want for templateData.name and templateData.github? Ideally, because they'll both be inserted into the Header area, we'd like to keep them together.
   const { projects, about, ...header } = templateData;
+  console.log(`Projects ${projects}, about ${about}, header ${header}`);
+  console.log(templateData);
   return `
   <!DOCTYPE html>
   <html lang="en">
